@@ -10,7 +10,7 @@ def main():
     def _callback(message):
         print("Message: " + message)
 
-    controller = pyzwave.controller.Controller("COM3")
+    controller = pyzwave.SerialInterface("COM3")
     controller.set_callback(_callback)
     controller.start()
 
