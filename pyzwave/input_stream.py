@@ -31,6 +31,12 @@ class InputStream:
 
         return None
 
+    def read_one(self, timeout):
+        """ Reads a single byte from the stream """
+        result = self.read(1, timeout)
+        if result:
+            return result[0]
+
     def write(self, data):
         """ Writes to the stream """
         with self._cv:

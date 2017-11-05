@@ -7,17 +7,18 @@ def main():
     """ main function """
     print("pyzwave sniffer")
 
-    def _callback(message):
-        print("Message: " + message)
+    def _on_dataframe_received(dataframe):
+        print("Received: " + repr(dataframe))
 
     controller = pyzwave.SerialInterface("COM3")
-    controller.set_callback(_callback)
+    controller.set_dataframe_received_callback(_on_dataframe_received)
     controller.start()
 
     try:
         while True:
             try:
-                command = input("Enter 'q' to quit:")
+                print("Enter 'q' to quit")
+                command = input()
             except KeyboardInterrupt:
                 break
             if command == "q":
