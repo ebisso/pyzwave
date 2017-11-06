@@ -80,13 +80,7 @@ class SerialInterface:
         if length:
             body = self._instream.read(length, 1)
             if body:
-                dataframe = dict()
-                dataframe['prefix'] = constants.DATA_FRAME_PREFIX
-                dataframe['length'] = length
-                dataframe['type'] = body[0]
-                dataframe['command'] = body[1]
-                dataframe['payload'] = body[2:length - 1]
-                dataframe['checksum'] = body[length - 1]
+                dataframe = bytes([constants.DATA_FRAME_PREFIX, length]) + body
                 self._write_ack()
                 self._dataframe_received_callback(dataframe)
 
